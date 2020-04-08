@@ -39,6 +39,6 @@ public class MovieTicket {
     @Column(name = "show_timing")
     private String showTiming;
 
-    @Column(name = "booked_seats")
-    private List<String> bookedSeats;
+//    @Column(name = "booked_seats")
+//    private List<String> bookedSeats;
 }

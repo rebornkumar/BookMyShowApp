@@ -20,7 +20,7 @@ public class Show {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "show_id")
-    private long id;
+    private int id;
 
     @Column(name = "show_date", columnDefinition = "DATE", nullable = false)
     private LocalDate showDate;
