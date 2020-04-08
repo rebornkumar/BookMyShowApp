@@ -20,5 +20,9 @@ public class Role {
 
     @Column(name = "role")
     private String role;
+
+    public String getRole() {
+        return this.role;
+    }
 }
 
