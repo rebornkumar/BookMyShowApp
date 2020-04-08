@@ -97,5 +97,25 @@ public class User {
     public void setUserType(String userType) {
         this.userType = userType.equals("app_user")?UserType.APP_USER: UserType.THEATRE_OWNER;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
 

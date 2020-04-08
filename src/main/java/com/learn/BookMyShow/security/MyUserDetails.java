@@ -15,6 +15,7 @@ public class MyUserDetails implements UserDetails {
     private String password;
     private boolean active;
     List<GrantedAuthority> authorities;
+
     public MyUserDetails(User user) {
         this.userName = user.getUsername();
         this.password = user.getPassword();
@@ -34,12 +35,12 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return this.userName;
     }
 
     @Override
@@ -59,6 +60,6 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return this.active;
     }
 }
