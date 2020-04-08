@@ -20,20 +20,20 @@ public class Seat {
     @Column(name = "seat_id")
     private int id;
 
-//    @Column(name = "seat_number", nullable = false)
-//    private String seatNumber;
-//
-//    @Column(name = "rate", nullable = false)
-//    private int rate;
-//
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "seat_type", nullable = false)
-//    private SeatType seatType;
-//
-//    @Column(name = "is_booked", columnDefinition = "bit(1) default 0", nullable = false)
-//    private boolean booked;
+    @Column(name = "seat_number", nullable = false)
+    private String seatNumber;
 
-//    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "rate", nullable = false)
+    private int rate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "seat_type", nullable = false)
+    private SeatType seatType;
+
+    @Column(name = "is_booked", columnDefinition = "bit(1) default 0", nullable = false)
+    private boolean booked;
+
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "booked_at")
     private Date bookedAt;
 
