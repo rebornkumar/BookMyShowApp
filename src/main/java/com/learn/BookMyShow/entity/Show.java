@@ -28,8 +28,9 @@ public class Show {
     @Column(name = "show_time", columnDefinition = "TIME", nullable = false)
     private LocalTime showTime;
 
-    @Column(name = "show_movie_id",nullable = false)
-    private int showMovieId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Screen screen;

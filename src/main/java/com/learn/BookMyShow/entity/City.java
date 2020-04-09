@@ -21,6 +21,9 @@ public class City {
     @Column(name = "city_code")
     private String cityCode;
 
+    @Column(name = "city_name")
+    private String cityName;
+
     @Column(name = "address")
     private String address;
 
