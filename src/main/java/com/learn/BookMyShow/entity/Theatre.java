@@ -24,46 +24,6 @@ public class Theatre {
     @Column(name = "description")
     private String description;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTheatreName() {
-        return theatreName;
-    }
-
-    public void setTheatreName(String theatreName) {
-        this.theatreName = theatreName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    public TheatreOwner getTheatreOwner() {
-        return theatreOwner;
-    }
-
-    public void setTheatreOwner(TheatreOwner theatreOwner) {
-        this.theatreOwner = theatreOwner;
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;

@@ -14,73 +14,10 @@ import java.util.List;
 @ToString
 @Entity
 public class MovieTicket {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public int getScreenNumber() {
-        return screenNumber;
-    }
-
-    public void setScreenNumber(int screenNumber) {
-        this.screenNumber = screenNumber;
-    }
-
-    public String getTheatreName() {
-        return theatreName;
-    }
-
-    public void setTheatreName(String theatreName) {
-        this.theatreName = theatreName;
-    }
-
-    public String getTheatreAddress() {
-        return theatreAddress;
-    }
-
-    public void setTheatreAddress(String theatreAddress) {
-        this.theatreAddress = theatreAddress;
-    }
-
-    public String getShowTiming() {
-        return showTiming;
-    }
-
-    public void setShowTiming(String showTiming) {
-        this.showTiming = showTiming;
-    }
 
     @Column(name = "username")
     private String username;

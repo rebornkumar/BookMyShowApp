@@ -22,30 +22,6 @@ public class TheatreOwner {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Theatre> getTheatres() {
-        return theatres;
-    }
-
-    public void setTheatres(List<Theatre> theatres) {
-        this.theatres = theatres;
-    }
-
     @OneToMany(mappedBy = "theatreOwner", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Theatre> theatres;
 }

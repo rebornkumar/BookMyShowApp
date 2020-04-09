@@ -20,21 +20,5 @@ public class Role {
 
     @Column(name = "role")
     private String role;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getRole() {
-        return this.role;
-    }
 }
 
