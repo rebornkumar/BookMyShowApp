@@ -19,6 +19,30 @@ public class Screen {
     @Column(name = "screen_id")
     private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Theatre getTheatre() {
+        return theatre;
+    }
+
+    public void setTheatre(Theatre theatre) {
+        this.theatre = theatre;
+    }
+
+    public List<Show> getShows() {
+        return shows;
+    }
+
+    public void setShows(List<Show> shows) {
+        this.shows = shows;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
