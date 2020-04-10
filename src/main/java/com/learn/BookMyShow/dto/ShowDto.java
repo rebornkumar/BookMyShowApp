@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShowDto {
-    private int screenNumber;
+    private Integer screenNumber;
     private String movieTitle;
     private String language;
     private String showDate;

@@ -1,13 +1,15 @@
 package com.learn.BookMyShow.entity;
 
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
+//@Builder
 @AllArgsConstructor
 @ToString
 @Table(name = "screen")
@@ -24,5 +26,5 @@ public class Screen {
     private Theatre theatre;
 
     @OneToMany(mappedBy = "screen",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Show> shows;
+    private List<Show> shows = new ArrayList<>();
 }

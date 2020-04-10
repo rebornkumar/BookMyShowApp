@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@Builder
+//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,9 +29,9 @@ public class Seat {
     @Enumerated(EnumType.STRING)
     @Column(name = "seat_type", nullable = false)
     private SeatType seatType;
-
-    @Column(name = "is_booked", columnDefinition = "bit(1) default 0", nullable = false)
-    private boolean booked;
+//
+//    @Column(name = "is_booked", columnDefinition = "bit(1) default 0", nullable = false)
+//    private boolean booked;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "booked_at")

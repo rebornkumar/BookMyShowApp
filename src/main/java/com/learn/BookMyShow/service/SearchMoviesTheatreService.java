@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SearchMoviesTheatreService {
 
-    List<MovieDto> getMovieDtoListForCity(String cityName, String cityCode);
-    List<TheatreMovieDto> getMovieShowDetails(String cityCode,String movieTitle);
+//    List<MovieDto> getMovieDtoListForCity(String cityName, String cityCode);
+//    List<TheatreMovieDto> getMovieShowDetails(String cityCode,String movieTitle);
 
 }

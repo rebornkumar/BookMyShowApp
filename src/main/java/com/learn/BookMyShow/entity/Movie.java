@@ -3,13 +3,14 @@ package com.learn.BookMyShow.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
+//@Builder
 @AllArgsConstructor
 @ToString
 @Table(name = "movie")
@@ -20,6 +21,10 @@ public class Movie {
     @Column(name = "movie_id")
     private int id;
 
+    @NotEmpty(message = "code cant be empty")
+    @Column(name = "movie_code",unique = true,nullable = false)
+    private String movieCode;
+
     @Column(name = "title")
     private String title;
 
@@ -29,9 +34,9 @@ public class Movie {
     @Column(name = "language")
     private String language;
 
-    @OneToOne(mappedBy = "movie",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Show show;
-    @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Theatre> theatres;
-
+    @OneToMany(mappedBy = "movie",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Show> shows;
+//
+//    @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//    private List<Theatre> theatres;
 }

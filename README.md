@@ -1,7 +1,10 @@
 # BookMyShowApp
 APIs for an online ticketing system that sells movie tickets like BookMyShow.
 
-**The system should be able to list down cities where it's cinemas are located.
+**
+The system should allow the registration of new movie theaters and adding new movie shows from theater owners. 
+
+The system should be able to list down cities where it's cinemas are located.
 
 Upon selecting the city, the system should display the movies released in that particular city to that user.
 

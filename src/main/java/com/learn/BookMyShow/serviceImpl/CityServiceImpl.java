@@ -14,16 +14,16 @@ import java.util.Map;
 @Service
 public class CityServiceImpl implements CityService {
 
-    @Autowired
-    private CityRepo cityRepo;
-
-    @Override
-    public Map<String,String> getCityName() {
-        List<City>cities = cityRepo.findAll();
-        Map<String,String>cityCodesMap = new HashMap<String,String>();
-        for(City city:cities) {
-            cityCodesMap.put(city.getCityCode(),city.getCityName());
-        }
-        return cityCodesMap;
-    }
+//    @Autowired
+//    private CityRepo cityRepo;
+//
+//    @Override
+//    public Map<String,String> getCityName() {
+//        List<City>cities = cityRepo.findAll();
+//        Map<String,String>cityCodesMap = new HashMap<String,String>();
+//        for(City city:cities) {
+//            cityCodesMap.put(city.getCityCode(),city.getCityName());
+//        }
+//        return cityCodesMap;
+//    }
 }

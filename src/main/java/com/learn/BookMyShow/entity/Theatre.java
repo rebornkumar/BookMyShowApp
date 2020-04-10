@@ -36,9 +36,14 @@ public class Theatre {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "theatre_movies",joinColumns = @JoinColumn(name = "theatre_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private List<Movie>movies;
+//    @ManyToMany(cascade = CascadeType.MERGE)
+//    @JoinTable(name = "theatre_movies",joinColumns = @JoinColumn(name = "theatre_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
+//    private List<Movie>movies;
+//
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "movie_id")
+//    private Movie movie;
 
     @OneToMany(mappedBy = "theatre", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Screen> screens;

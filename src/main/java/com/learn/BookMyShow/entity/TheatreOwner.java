@@ -7,7 +7,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
+//@Builder
 @AllArgsConstructor
 @ToString
 @Entity

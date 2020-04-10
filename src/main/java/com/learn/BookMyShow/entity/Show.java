@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@Builder
+//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,12 +23,12 @@ public class Show {
     private int id;
 
     @Column(name = "show_date", columnDefinition = "DATE", nullable = false)
-    private LocalDate showDate;
+    private String showDate;
 
     @Column(name = "show_time", columnDefinition = "TIME", nullable = false)
-    private LocalTime showTime;
+    private String showTime;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
