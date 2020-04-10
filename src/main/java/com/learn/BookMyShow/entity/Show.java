@@ -22,10 +22,10 @@ public class Show {
     @Column(name = "show_id")
     private int id;
 
-    @Column(name = "show_date", columnDefinition = "DATE", nullable = false)
+    @Column(name = "show_date", nullable = true)
     private String showDate;
 
-    @Column(name = "show_time", columnDefinition = "TIME", nullable = false)
+    @Column(name = "show_time", nullable = true)
     private String showTime;
 
     @ManyToOne(fetch = FetchType.LAZY)

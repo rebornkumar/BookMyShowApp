@@ -3,6 +3,7 @@ package com.learn.BookMyShow.controller;
 import com.learn.BookMyShow.dto.*;
 import com.learn.BookMyShow.service.CityService;
 import com.learn.BookMyShow.service.MovieService;
+import com.learn.BookMyShow.service.ScreenService;
 import com.learn.BookMyShow.service.TheatreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,10 @@ public class MyController {
 
     @Autowired
     private TheatreService theatreService;
+
+    @Autowired
+    private ScreenService screenService;
+
 
     @RequestMapping(value = "/movie",method = RequestMethod.POST)
     public ResponseDto createMovie(@RequestBody @Valid @NotNull MovieDto movieDto, Errors errors) throws Exception{
@@ -76,5 +81,31 @@ public class MyController {
     @RequestMapping(value = "/theatre",method = RequestMethod.GET)
     public TheatreDto getTheatre() {
         return new TheatreDto();
+    }
+
+
+
+    @RequestMapping(value = "/screen",method = RequestMethod.POST)
+    public ItemResponseDto createScreen(@RequestBody @Valid @NotNull ScreenDto screenDto, Errors errors) throws Exception{
+        ResponseDto responseDto = new ResponseDto("failed","enter valid input");
+        ItemResponseDto itemResponseDto = new ItemResponseDto();
+        itemResponseDto.setResponseDto(responseDto);
+        if(errors.hasErrors()) {
+            log.error("invalid input from user");
+        }
+        else {
+            itemResponseDto = screenService.addScreenToTheatre(screenDto);
+        }
+
+        return itemResponseDto;
+    }
+    @RequestMapping(value = "/screen",method = RequestMethod.GET)
+    public ScreenDto getScreen() {
+        return new ScreenDto();
+    }
+
+    @RequestMapping(value = "/show",method = RequestMethod.GET)
+    public ShowDto getShow() {
+        return new ShowDto();
     }
 }

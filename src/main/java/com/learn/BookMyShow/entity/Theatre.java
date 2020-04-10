@@ -2,6 +2,7 @@ package com.learn.BookMyShow.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -32,6 +33,6 @@ public class Theatre {
     private TheatreOwner theatreOwner;
 
     @OneToMany(mappedBy = "theatre", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Screen> screens;
+    private List<Screen> screens = new ArrayList<Screen>();
 }
 

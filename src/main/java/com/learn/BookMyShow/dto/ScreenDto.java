@@ -8,25 +8,17 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @NotNull
-public class ShowDto {
+public class ScreenDto {
 
-    private Integer screenNumber;
+    private Integer theatreId;
     @NotEmpty
-    private String movieCode;
-    @NotEmpty
-    private String movieTitle;
-    @NotEmpty
-    private String language;
-    @NotEmpty
-    private String showDate;
-    @NotEmpty
-    private String showTime;
-    private Integer numberOfSeats;
+    private List<ShowDto> showDtoList = new ArrayList<ShowDto>();
 }
