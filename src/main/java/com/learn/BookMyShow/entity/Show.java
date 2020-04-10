@@ -1,10 +1,12 @@
 package com.learn.BookMyShow.entity;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 //@Builder
@@ -22,10 +24,10 @@ public class Show {
     @Column(name = "show_id")
     private int id;
 
-    @Column(name = "show_date", nullable = true)
+    @Column(name = "show_date",nullable = false)
     private String showDate;
 
-    @Column(name = "show_time", nullable = true)
+    @Column(name = "show_time",nullable = false)
     private String showTime;
 
     @ManyToOne(fetch = FetchType.LAZY)

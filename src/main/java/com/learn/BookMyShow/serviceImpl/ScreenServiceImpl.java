@@ -6,16 +6,18 @@ import com.learn.BookMyShow.dto.ScreenDto;
 import com.learn.BookMyShow.dto.ShowDto;
 import com.learn.BookMyShow.entity.*;
 import com.learn.BookMyShow.enums.Item;
-import com.learn.BookMyShow.repository.MovieRepo;
-import com.learn.BookMyShow.repository.ScreenRepo;
-import com.learn.BookMyShow.repository.ShowRepo;
-import com.learn.BookMyShow.repository.TheatreRepo;
+import com.learn.BookMyShow.repository.*;
 import com.learn.BookMyShow.service.ScreenService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +37,9 @@ public class ScreenServiceImpl implements ScreenService {
     @Autowired
     private ScreenRepo screenRepo;
 
+    @Autowired
+    private SeatRepo seatRepo;
+
     @Override
     public ItemResponseDto addScreenToTheatre(ScreenDto screenDto) {
 
@@ -52,8 +57,14 @@ public class ScreenServiceImpl implements ScreenService {
                 Optional<Movie> optionalMovie = movieRepo.findByMovieCode(showDto.getMovieCode());
                 if(optionalMovie.isPresent()) {
                     show.setMovie(optionalMovie.get());
-//                    show.setShowDate(showDto.getShowDate());
-//                    show.setShowTime(showDto.getShowTime());
+                    show.setShowDate(showDto.getShowDate());
+                    show.setShowTime(showDto.getShowTime());
+//                    Date currentDate = new Date();
+//                    DateTimeFormat currentTimeStamp = new DateTimeFormat();
+////                    show.setShowDate(currentDate.format(DateTimeFormatter.ofPattern("dd-MMM-yy")));
+////                    show.setShowTime(currentTimeStamp.format(DateTimeFormatter.ISO_LOCAL_DATE));
+//                    show.setShowDate(currentDate);
+//                    show.setShowTime(currentTimeStamp);
                     show.setSeats(createSeatsInShow(showDto.getNumberOfSeats()));
                     showRepo.save(show);
                     shows.add(show);
@@ -87,6 +98,7 @@ public class ScreenServiceImpl implements ScreenService {
         for(int row = 0; row < totalSeats;row++) {
             Seat seat = new Seat();
             seat.setSeatNumber(generateSeatNumber(row));
+            seatRepo.save(seat);
         }
         return seats;
     }
