@@ -16,7 +16,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude
-
 public class MovieDto {
 
     @NotEmpty(message =  "chal chutiye")

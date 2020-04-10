@@ -1,8 +1,11 @@
 package com.learn.BookMyShow.controller;
 
+import com.learn.BookMyShow.dto.CityDto;
 import com.learn.BookMyShow.dto.MovieDto;
 import com.learn.BookMyShow.dto.ResponseDto;
+import com.learn.BookMyShow.service.CityService;
 import com.learn.BookMyShow.service.MovieService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,35 +15,43 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+@Slf4j
 @RestController
-@RequestMapping(value = "/check")
+@RequestMapping(value = "/create")
 public class MyController {
 
     @Autowired
     private MovieService movieService;
 
-    @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public ResponseDto createMovie(@RequestBody @Valid @NotNull MovieDto movieDto, Errors errors) throws Exception{
+    @Autowired
+    private CityService cityService;
 
-//        if (errors.hasErrors()) {
-//            // Extract ConstraintViolation list from body errors
-//            List<ConstraintViolation<?>> violationsList = new ArrayList<>();
-//            for (ObjectError e : errors.getAllErrors()) {
-//                violationsList.add(e.unwrap(ConstraintViolation.class));
-//            }
-//
-//            String exceptionMessage = "";
-//
-//            // Construct a helpful message for each input violation
-//            for (ConstraintViolation<?> violation : violationsList) {
-//                exceptionMessage += violation.getPropertyPath() + " " + violation.getMessage() + "\n";
-//            }
-//            throw new Exception(String.format("Request input is invalid:\n%s", exceptionMessage));
-//        }
+    @RequestMapping(value = "/movie",method = RequestMethod.POST)
+    public ResponseDto createMovie(@RequestBody @Valid @NotNull MovieDto movieDto, Errors errors) throws Exception{
         ResponseDto responseDto = new ResponseDto("failed","enter valid input");
-        if(errors.hasErrors() == false) {
+        if(errors.hasErrors()) {
+            log.error("invalid inpur from user");
+        }
+        else {
             responseDto = movieService.createMovie(movieDto);
         }
         return responseDto;
     }
+    @RequestMapping(value = "/city",method = RequestMethod.POST)
+    public ResponseDto createCity(@RequestBody @Valid @NotNull CityDto cityDto, Errors errors) throws Exception{
+        ResponseDto responseDto = new ResponseDto("failed","enter valid input");
+        if(errors.hasErrors()) {
+            log.error("invalid input from user");
+        }
+        else {
+            responseDto = cityService.createCity(cityDto);
+        }
+
+        return responseDto;
+    }
+    @RequestMapping(value = "/city",method = RequestMethod.GET)
+    public CityDto getType() {
+        return new CityDto();
+    }
+
 }

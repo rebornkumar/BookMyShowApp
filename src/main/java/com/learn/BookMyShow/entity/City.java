@@ -18,7 +18,7 @@ public class City {
     @Column(name =  "city_id")
     private int id;
 
-    @Column(name = "city_code")
+    @Column(name = "city_code",unique = true,nullable = false)
     private String cityCode;
 
     @Column(name = "city_name")
@@ -30,7 +30,7 @@ public class City {
     @Column(name = "state")
     private String state;
 
-    @Column(name = "pincode")
+    @Column(name = "pincode",unique = true)
     private Integer pincode;
 
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
