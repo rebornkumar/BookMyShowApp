@@ -1,5 +1,6 @@
 package com.learn.BookMyShow.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.learn.BookMyShow.dto.*;
 import com.learn.BookMyShow.service.CityService;
 import com.learn.BookMyShow.service.MovieService;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
 
 @Slf4j
 @RestController
+@JsonIgnoreProperties
 @RequestMapping(value = "/create")
 public class MyController {
 

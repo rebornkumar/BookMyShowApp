@@ -35,6 +35,7 @@ public class Show {
     private Movie movie;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "screen_id")
     private Screen screen;
 
     @OneToMany(mappedBy = "show",fetch = FetchType.LAZY,cascade = CascadeType.ALL)

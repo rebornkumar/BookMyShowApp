@@ -52,6 +52,9 @@ public class ScreenServiceImpl implements ScreenService {
         if(optionalTheatre.isPresent()) {
             Screen screen = new Screen();
             List<Show> shows = new ArrayList<>();
+            screen.setTheatre(optionalTheatre.get());
+            screenRepo.save(screen);
+            log.info("ScreenId : {}, created successfully",screen.getId());
             for(ShowDto showDto : screenDto.getShowDtoList()) {
                 Show show = new Show();
                 Optional<Movie> optionalMovie = movieRepo.findByMovieCode(showDto.getMovieCode());
@@ -59,13 +62,16 @@ public class ScreenServiceImpl implements ScreenService {
                     show.setMovie(optionalMovie.get());
                     show.setShowDate(showDto.getShowDate());
                     show.setShowTime(showDto.getShowTime());
+                    //
+                    showRepo.save(show);
+                    log.info("On screenId : {} , showId : {}, show created successfully",screen.getId(),show.getId());
 //                    Date currentDate = new Date();
 //                    DateTimeFormat currentTimeStamp = new DateTimeFormat();
-////                    show.setShowDate(currentDate.format(DateTimeFormatter.ofPattern("dd-MMM-yy")));
-////                    show.setShowTime(currentTimeStamp.format(DateTimeFormatter.ISO_LOCAL_DATE));
+//                    show.setShowDate(currentDate.format(DateTimeFormatter.ofPattern("dd-MMM-yy")));
+//                    show.setShowTime(currentTimeStamp.format(DateTimeFormatter.ISO_LOCAL_DATE));
 //                    show.setShowDate(currentDate);
 //                    show.setShowTime(currentTimeStamp);
-                    show.setSeats(createSeatsInShow(showDto.getNumberOfSeats()));
+                    show.setSeats(createSeatsInShow(show,showDto.getNumberOfSeats()));
                     showRepo.save(show);
                     shows.add(show);
                 }
@@ -79,6 +85,7 @@ public class ScreenServiceImpl implements ScreenService {
             screenRepo.save(screen);
             optionalTheatre.get().getScreens().add(screen);
             theatreRepo.save(optionalTheatre.get());
+            log.info("theatre with theatreId : {}  successfully",optionalTheatre.get().getId());
             itemResponseDto.setItemId(screen.getId());
             errorMessage = errorMessage + " screen added successful above mentioned movies missing screenId " + screen.getId();
             responseDto.setStatus("partial success");
@@ -93,11 +100,12 @@ public class ScreenServiceImpl implements ScreenService {
         itemResponseDto.setResponseDto(responseDto);
         return itemResponseDto;
     }
-    private List<Seat> createSeatsInShow(Integer totalSeats) {
+    private List<Seat> createSeatsInShow(Show show,Integer totalSeats) {
         List<Seat> seats = new ArrayList<Seat>();
         for(int row = 0; row < totalSeats;row++) {
             Seat seat = new Seat();
             seat.setSeatNumber(generateSeatNumber(row));
+            seat.setShow(show);
             seatRepo.save(seat);
         }
         return seats;
@@ -107,7 +115,7 @@ public class ScreenServiceImpl implements ScreenService {
         num /= 20;
         char row = (char)(rem + 'A');
         String column  = Integer.toString(num);
-        String seatNumber = Character.toString(row) + " "+ column;
+        String seatNumber = column + "" +Character.toString(row);
         return seatNumber;
     }
 
