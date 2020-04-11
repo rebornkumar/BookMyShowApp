@@ -2,12 +2,6 @@ package com.learn.BookMyShow.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.learn.BookMyShow.dto.*;
-import com.learn.BookMyShow.entity.Movie;
-import com.learn.BookMyShow.entity.Seat;
-import com.learn.BookMyShow.entity.Theatre;
-import com.learn.BookMyShow.repository.MovieRepo;
-import com.learn.BookMyShow.repository.SeatRepo;
-import com.learn.BookMyShow.repository.TheatreRepo;
 import com.learn.BookMyShow.service.CityService;
 import com.learn.BookMyShow.service.MovieService;
 import com.learn.BookMyShow.service.ScreenService;
@@ -18,15 +12,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
 @JsonIgnoreProperties
-@RequestMapping(value = "/create")
-public class MyController {
+@RequestMapping(value = "/owner")
+public class TheatreShowController {
 
     @Autowired
     private MovieService movieService;
@@ -40,15 +31,6 @@ public class MyController {
     @Autowired
     private ScreenService screenService;
 
-    @Autowired
-    private SeatRepo seatRepo;
-
-    @Autowired
-    private MovieRepo movieRepo;
-
-    @Autowired
-    private TheatreRepo theatreRepo;
-
 
     @RequestMapping(value = "/movie",method = RequestMethod.POST)
     public ResponseDto createMovie(@RequestBody @Valid @NotNull MovieDto movieDto, Errors errors) throws Exception{
@@ -61,7 +43,6 @@ public class MyController {
         }
         return responseDto;
     }
-
 
     @RequestMapping(value = "/city",method = RequestMethod.POST)
     public ResponseDto createCity(@RequestBody @Valid @NotNull CityDto cityDto, Errors errors) throws Exception{
@@ -92,14 +73,12 @@ public class MyController {
         else {
             itemResponseDto = theatreService.createTheatre(theatreDto);
         }
-
         return itemResponseDto;
     }
     @RequestMapping(value = "/theatre",method = RequestMethod.GET)
     public TheatreDto getTheatre() {
         return new TheatreDto();
     }
-
 
 
     @RequestMapping(value = "/screen",method = RequestMethod.POST)
@@ -125,19 +104,5 @@ public class MyController {
     public ShowDto getShow() {
         return new ShowDto();
     }
-    @RequestMapping(value = "/exp",method = RequestMethod.GET)
-    public List<Seat> getExp(@RequestParam Integer id) {
-        return seatRepo.findByShowIdAndSeatNumber(id, new ArrayList<String>());
-    }
-    @RequestMapping(value = "/exp1",method = RequestMethod.GET)
-    public Optional<Movie> getExp1(@RequestParam String cityCode) {
-        return movieRepo.findByMovieCode(cityCode);
-    }
-//
-//    @RequestMapping(value = "/exp2",method = RequestMethod.GET)
-//    public List<Theatre> getExp1(@RequestParam Integer ownerId) {
-//        return theatreRepo.findByOwnerId(ownerId);
-//    }
-
 
 }
