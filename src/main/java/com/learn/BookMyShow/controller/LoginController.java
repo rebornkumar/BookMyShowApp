@@ -3,7 +3,9 @@ package com.learn.BookMyShow.controller;
 
 import com.learn.BookMyShow.entity.User;
 import com.learn.BookMyShow.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-
+@Slf4j
 @RestController
 public class LoginController {
 
@@ -36,19 +38,22 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/registration",method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid @RequestBody User user, BindingResult bindingResult) {
+    @RequestMapping(value = "/registration",method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ModelAndView createNewUser(@Valid  User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByUsername(user.getUsername());
         if (userExists != null) {
             bindingResult
-                    .rejectValue("userName", "error.user",
+                    .rejectValue("username", "error.user",
                             "There is already a user registered with the user name provided");
+            log.info("user already exists in the system");
         }
         else if(bindingResult.hasErrors()) {
+            log.error("Something went wrong");
             modelAndView.setViewName("registration");
         } else {
             userService.saveUser(user);
+            log.info("User is saved to DB successfully with UserId : {}", user.getId());
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("registration");
@@ -62,7 +67,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getUsername() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        modelAndView.addObject("username", "Welcome " + user.getUsername() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
         modelAndView.setViewName("admin/home");
         return modelAndView;

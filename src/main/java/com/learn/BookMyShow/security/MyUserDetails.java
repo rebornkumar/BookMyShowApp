@@ -2,6 +2,7 @@ package com.learn.BookMyShow.security;
 
 
 import com.learn.BookMyShow.entity.User;
+import com.learn.BookMyShow.util.Constant;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +21,7 @@ public class MyUserDetails implements UserDetails {
         this.userName = user.getUsername();
         this.password = user.getPassword();
         this.active = user.getActive();
-        if(user.getUserType().equals("app_user")) {
+        if(Constant.END_USER.equals(user.getUserType())) {
             authorities.add(new SimpleGrantedAuthority("role_user"));
         }
         else {

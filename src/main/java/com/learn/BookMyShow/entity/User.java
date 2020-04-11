@@ -49,9 +49,8 @@ public class User {
     @Column(name = "active")
     private Boolean active;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "user_type")
-    private UserType userType;
+    private String userType;
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
