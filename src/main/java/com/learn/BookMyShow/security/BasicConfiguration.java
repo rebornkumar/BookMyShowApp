@@ -47,7 +47,7 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/")
                 .failureUrl("/login?error=true")
                 .defaultSuccessUrl("/admin/home")
-                .usernameParameter("user_name")
+                .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher(logoutPage))
