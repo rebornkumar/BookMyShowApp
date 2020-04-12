@@ -34,9 +34,9 @@ public class MovieBookingController {
     }
 
     @RequestMapping(value = "/movie",method = RequestMethod.GET)
-    public List<TheatreMovieDto> getMovieShowListForUser(@RequestParam String cityCode,@RequestParam(required = false) String cityName) {
+    public List<TheatreMovieDto> getMovieShowListForUser(@RequestParam String cityCode) {
 
-        List<TheatreMovieDto> theatreMovieDtoList = searchMoviesTheatreService.getMovieDtoListForCity(cityCode,cityName);
+        List<TheatreMovieDto> theatreMovieDtoList = searchMoviesTheatreService.getMovieDtoListForCity(cityCode);
         return theatreMovieDtoList;
     }
     @RequestMapping(value = "/show",method = RequestMethod.GET)
@@ -48,7 +48,7 @@ public class MovieBookingController {
     public Map<String,MovieTicket> createMovieBooking(@RequestBody @Valid MovieBookingRequest movieBookingRequest) {
         MovieTicket movieTicket = movieTicketBookingService.createMovieTicketForUser(movieBookingRequest.getEndUserId(),movieBookingRequest.getShowId(),movieBookingRequest.getSeatNumber());
         Map<String,MovieTicket> response = new HashMap<String,MovieTicket>();
-        if(movieTicket != null) {
+        if(movieTicket.getId() != 0) {
             log.info("Ticket generated successfully with TicketId : {}",movieTicket.getId());
             response.put("status : successful",movieTicket);
         }

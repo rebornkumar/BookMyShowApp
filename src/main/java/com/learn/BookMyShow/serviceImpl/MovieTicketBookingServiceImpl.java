@@ -36,10 +36,10 @@ public class MovieTicketBookingServiceImpl implements MovieTicketBookingService 
     @Transactional
     @Override
     public synchronized MovieTicket createMovieTicketForUser(Integer endUserId, Integer showId, List<String> seatNumbers) {
+        MovieTicket movieTicket = new MovieTicket();
         if(seatValidation(showId,seatNumbers)) {
             //book tickets
-            MovieTicket movieTicket = new MovieTicket();
-            List<Seat> seatList = seatRepo.findByShowIdAndSeatNumber(showId,seatNumbers);
+            List<Seat> seatList = seatRepo.findByShowIdAndSeatNumberList(showId,seatNumbers);
             for(Seat seat : seatList) {
                 seat.setBooked(true);
                 seat.setCustomerId(endUserId);
@@ -52,7 +52,7 @@ public class MovieTicketBookingServiceImpl implements MovieTicketBookingService 
             movieTicket.setBookedSeats(seats);
             generateMovieTicket(movieTicket,showId,endUserId);
         }
-        return null;
+        return movieTicket;
     }
     private void generateMovieTicket(MovieTicket movieTicket,Integer showId,Integer endUserId) {
         Optional<Show> show = showRepo.findById(showId);
@@ -63,11 +63,11 @@ public class MovieTicketBookingServiceImpl implements MovieTicketBookingService 
             movieTicket.setTheatreName(show.get().getScreen().getTheatre().getTheatreName());
             movieTicket.setScreenNumber(show.get().getScreen().getId());
             movieTicket.setShowTiming(show.get().getShowTime());
-            if(show.get().getScreen().getTheatre().getCity().getAddress() != null) {
-                movieTicket.setTheatreAddress(show.get().getScreen().getTheatre().getCity().getAddress() + "\n");
-            }
+//            if(show.get().getScreen().getTheatre().getCity().getAddress() != null) {
+//                movieTicket.setTheatreAddress(show.get().getScreen().getTheatre().getCity().getAddress() + "\n");
+//            }
             if(show.get().getScreen().getTheatre().getCity().getCityName() != null) {
-                movieTicket.setTheatreAddress(movieTicket.getTheatreAddress() + " " +show.get().getScreen().getTheatre().getCity().getCityName());
+                movieTicket.setTheatreAddress(show.get().getScreen().getTheatre().getCity().getAddress() + " " +show.get().getScreen().getTheatre().getCity().getCityName());
             }
             movieTicket.setUsername(user.get().getUser().getUsername());
             movieTicket.setCustomerName(user.get().getUser().getName());
@@ -75,8 +75,9 @@ public class MovieTicketBookingServiceImpl implements MovieTicketBookingService 
         }
     }
     private boolean seatValidation(Integer showId,List<String>seatNumbers) {
-        Integer availableSeats = seatRepo.findByShowIdAndSeatNumber(showId,seatNumbers).size();
-        if(availableSeats == seatNumbers.size()) {
+        List<Seat> availableSeats = seatRepo.findByShowIdAndSeatNumberList(showId,seatNumbers);
+        log.info("request Seat Number : {} , available Seats : {}",seatNumbers.size(),availableSeats.size());
+        if(availableSeats.size() == seatNumbers.size()) {
             return true;
         }
         else {

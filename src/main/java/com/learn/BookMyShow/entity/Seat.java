@@ -23,8 +23,8 @@ public class Seat {
     @Column(name = "seat_number", nullable = true)
     private String seatNumber;
 
-    @Column(name = "is_booked",nullable = false)
-    private boolean booked = false;
+    @Column(name = "is_booked")
+    private Boolean booked;
 
     @Column(name = "customer_id")
     private Integer customerId;

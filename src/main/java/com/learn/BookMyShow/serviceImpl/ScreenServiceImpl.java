@@ -98,6 +98,7 @@ public class ScreenServiceImpl implements ScreenService {
         List<Seat> seats = new ArrayList<Seat>();
         for(int row = 0; row < totalSeats;row++) {
             Seat seat = new Seat();
+            seat.setBooked(false);
             seat.setSeatNumber(generateSeatNumber(row));
             seat.setShow(show);
             seatRepo.save(seat);

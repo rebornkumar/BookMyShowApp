@@ -11,6 +11,6 @@ import java.util.Map;
 public interface SearchMoviesTheatreService {
 
     Map<String,String> getCityCodeList();
-    List<TheatreMovieDto> getMovieDtoListForCity(String cityName, String cityCode);
+    List<TheatreMovieDto> getMovieDtoListForCity(String cityCode);
     List<TheatreMovieDto> getMovieShowDetails(String cityCode,String movieCode);
 }

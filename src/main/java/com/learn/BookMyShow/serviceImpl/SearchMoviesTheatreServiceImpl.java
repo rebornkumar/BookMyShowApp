@@ -36,16 +36,16 @@ public class SearchMoviesTheatreServiceImpl implements SearchMoviesTheatreServic
         return cityMapping;
     }
     @Override
-    public List<TheatreMovieDto> getMovieDtoListForCity(String cityName, String cityCode) {
+    public List<TheatreMovieDto> getMovieDtoListForCity(String cityCode) {
         List<MovieDto>movieDtoList = new ArrayList<MovieDto>();
         List<Movie> movieList= new ArrayList<Movie>();
-        List<Theatre> theatreList = getTheatreListForCity(cityName,cityCode);
+        List<Theatre> theatreList = getTheatreListForCity(cityCode);
 
         return getMovieDtosFromTheateList(theatreList,null,true);
     }
     @Override
     public List<TheatreMovieDto> getMovieShowDetails(String cityCode, String movieCode) {
-        List<Theatre> theatreList = getTheatreListForCity(cityCode,cityCode);
+        List<Theatre> theatreList = getTheatreListForCity(cityCode);
         Optional<Movie>movie = movieRepo.findByMovieCode(movieCode);
         List<TheatreMovieDto> theatreMovieDtoList = new ArrayList<TheatreMovieDto>();
         if(movie.isPresent()) {
@@ -70,11 +70,11 @@ public class SearchMoviesTheatreServiceImpl implements SearchMoviesTheatreServic
         }
         return theatreMovieDtoList;
     }
-    private List<Theatre> getTheatreListForCity(String cityName,String cityCode) {
+    private List<Theatre> getTheatreListForCity(String cityCode) {
         List<Theatre> theatreList = new ArrayList<Theatre>();
-        Optional<City> userCity = cityRepo.findByCityNameOrCityCode(cityName,cityCode);
+        Optional<City> userCity = cityRepo.findByCityCode(cityCode);
         if(userCity.isPresent()) {
-            theatreList = theatreRepo.findTheatreByCity(userCity.get());
+            theatreList = theatreRepo.findTheatreByCityId(userCity.get().getId());
         }
         else {
             log.error("City with CityCode " + cityCode + " does not exist");
@@ -92,9 +92,15 @@ public class SearchMoviesTheatreServiceImpl implements SearchMoviesTheatreServic
         ShowDto showDto = new ShowDto();
         showDto.setLanguage(show.getMovie().getLanguage());
         showDto.setMovieTitle(show.getMovie().getTitle());
+        showDto.setMovieCode(show.getMovie().getMovieCode());
         showDto.setScreenNumber(show.getScreen().getId());
-//        showDto.setShowDate(show.getShowDate().format(DateTimeFormatter.ofPattern("dd-MMM-yy")));
-//        showDto.setShowTime(show.getShowTime().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        showDto.setShowTime(show.getShowTime());
+        showDto.setShowDate(show.getShowDate());
+        Map<String,Boolean>seatStatusMapping = new HashMap<String,Boolean>();
+        for(Seat seat : show.getSeats()) {
+            seatStatusMapping.put(seat.getSeatNumber(), false);
+        }
+        showDto.setAvailableSeats(seatStatusMapping);
         return showDto;
     }
 }

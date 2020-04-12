@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface CityRepo extends JpaRepository<City,Integer> {
 
-    Optional<City> findByCityNameOrCityCode(String cityName, String cityCode);
+    Optional<City> findByCityCode(String cityCode);
 }

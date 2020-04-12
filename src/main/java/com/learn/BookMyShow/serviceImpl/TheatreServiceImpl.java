@@ -44,7 +44,7 @@ public class TheatreServiceImpl implements TheatreService {
         itemResponseDto.setItemType(Item.THEATRE.toString());
         String errorMessage = "";
 
-        Optional<City> city = cityRepo.findByCityNameOrCityCode(theatreDto.getCityCode(),theatreDto.getCityCode());
+        Optional<City> city = cityRepo.findByCityCode(theatreDto.getCityCode());
         if(city.isPresent()) {
             theatre.setCity(city.get());
             theatre.setDescription(theatreDto.getDescription());
@@ -64,6 +64,7 @@ public class TheatreServiceImpl implements TheatreService {
             errorMessage = errorMessage + " CityCode : " + theatreDto.getCityCode() + " does not exist, enter valid cityCode or create new city";
         }
         ResponseDto responseDto = new ResponseDto("success",errorMessage);
+        log.info(errorMessage);
         itemResponseDto.setResponseDto(responseDto);
         return itemResponseDto;
     }
@@ -71,7 +72,7 @@ public class TheatreServiceImpl implements TheatreService {
         ItemResponseDto itemResponseDto = new ItemResponseDto();
         itemResponseDto.setItemType(Item.THEATRE.toString());
         String errorMessage = "";
-        Optional<City> city = cityRepo.findByCityNameOrCityCode(theatreDto.getCityCode(),theatreDto.getCityCode());
+        Optional<City> city = cityRepo.findByCityCode(theatreDto.getCityCode());
         if(city.isPresent()) {
             theatre.setCity(city.get());
             theatre.setDescription(theatreDto.getDescription());
@@ -91,6 +92,7 @@ public class TheatreServiceImpl implements TheatreService {
             errorMessage = errorMessage + " CityCode : " + theatreDto.getCityCode() + " does not exist, enter valid cityCode or create new city";
         }
         ResponseDto responseDto = new ResponseDto("success",errorMessage);
+        log.info(errorMessage);
         itemResponseDto.setResponseDto(responseDto);
         return itemResponseDto;
     }

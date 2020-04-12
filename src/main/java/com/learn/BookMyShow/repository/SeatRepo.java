@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface SeatRepo extends JpaRepository<Seat,Integer> {
-    @Query(value = "select * from seat join shows ON (seat.show_id = shows.show_id) where seat.show_id =?1 AND seat.seat_number IN ?2",nativeQuery = true)
-    List<Seat> findByShowIdAndSeatNumber(Integer showId, List<String> seatNumbers);
+    @Query(value = "select * from seat join shows ON (seat.show_id = shows.show_id) where seat.show_id = ?1 AND seat.seat_number IN ?2 AND seat.is_booked = 'f'",nativeQuery = true)
+    List<Seat> findByShowIdAndSeatNumberList(Integer showId, List<String> seatNumbers);
+    @Query(value = "select * from seat where is_booked = ?1",nativeQuery = true)
+    List<Seat> findByBooked(Boolean booked);
 }

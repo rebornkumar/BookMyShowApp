@@ -18,9 +18,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -127,17 +125,19 @@ public class MyController {
     }
     @RequestMapping(value = "/exp",method = RequestMethod.GET)
     public List<Seat> getExp(@RequestParam Integer id) {
-        return seatRepo.findByShowIdAndSeatNumber(id, new ArrayList<String>());
+        return seatRepo.findByShowIdAndSeatNumberList(id, new ArrayList<String>());
     }
     @RequestMapping(value = "/exp1",method = RequestMethod.GET)
     public Optional<Movie> getExp1(@RequestParam String cityCode) {
         return movieRepo.findByMovieCode(cityCode);
     }
 //
-//    @RequestMapping(value = "/exp2",method = RequestMethod.GET)
-//    public List<Theatre> getExp1(@RequestParam Integer ownerId) {
-//        return theatreRepo.findByOwnerId(ownerId);
-//    }
-
-
+    @RequestMapping(value = "/exp5",method = RequestMethod.GET)
+    public Map<String,Boolean> getExp5(@RequestParam boolean flag) {
+        Map<String,Boolean> seatStatusMapping = new HashMap<String,Boolean>();
+        for(Seat seat : seatRepo.findByBooked(flag)) {
+            seatStatusMapping.put(seat.getSeatNumber(), flag);
+        }
+        return seatStatusMapping;
+    }
 }

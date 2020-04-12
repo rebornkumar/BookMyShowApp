@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -28,5 +29,6 @@ public class ShowDto {
     private String showDate;
     @NotEmpty
     private String showTime;
+    Map<String,Boolean>availableSeats;
     private Integer numberOfSeats;
 }

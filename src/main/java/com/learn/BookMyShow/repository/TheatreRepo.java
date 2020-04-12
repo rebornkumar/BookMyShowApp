@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface TheatreRepo extends JpaRepository<Theatre,Integer> {
-    List<Theatre> findTheatreByCity(City city);
 
-//    @Query(value = "SELECT th from Theatre th JOIN FETCH TheatreOwner owner where owner.id = ?1 AND th.theatreName = ?2")
+    @Query(value = "select * from theatre join city ON (theatre.city_id = city.city_id) where city.city_id = ?1",nativeQuery = true)
+    List<Theatre> findTheatreByCityId(Integer cityId);
     @Query(value = "select * from theatre join theatre_owner ON (theatre_owner.owner_id = theatre.owner_id) where theatre_owner.owner_id = ?1 AND theatre.theatre_name = ?2",nativeQuery = true)
     Optional<Theatre> findByOwnerIdAndTheatreName(Integer ownerId,String theatreName);
     Optional<Theatre> findById(Integer theatreId);

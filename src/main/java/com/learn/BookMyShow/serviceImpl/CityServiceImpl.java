@@ -24,7 +24,7 @@ public class CityServiceImpl implements CityService {
     public ResponseDto createCity(CityDto cityDto) {
 
         ResponseDto responseDto = new ResponseDto();
-        Optional<City>oldCity = cityRepo.findByCityNameOrCityCode(cityDto.getCityName(),cityDto.getCityCode());
+        Optional<City>oldCity = cityRepo.findByCityCode(cityDto.getCityCode());
         if(oldCity.isPresent()) {
             updateCityFromDto(oldCity.get(),cityDto);
             responseDto.setStatus("city updated!!");
@@ -55,18 +55,4 @@ public class CityServiceImpl implements CityService {
         oldCity.setState(cityDto.getState());
         cityRepo.save(oldCity);
     }
-
-//    @Autowired
-//    private CityRepo cityRepo;
-//
-//    @Override
-//    public Map<String,String> getCityName() {
-//        List<City>cities = cityRepo.findAll();
-//        Map<String,String>cityCodesMap = new HashMap<String,String>();
-//        for(City city:cities) {
-//            cityCodesMap.put(city.getCityCode(),city.getCityName());
-//        }
-//        return cityCodesMap;
-//    }
-
 }
