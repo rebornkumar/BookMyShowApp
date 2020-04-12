@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Slf4j
 @RestController
 @JsonIgnoreProperties
-@RequestMapping(value = "/owner")
+@RequestMapping(value = "/v2")
 public class TheatreShowController {
 
     @Autowired

@@ -19,7 +19,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @JsonIgnoreProperties
-@RequestMapping(value = "/get")
+@RequestMapping(value = "/v1")
 public class MovieBookingController {
 
     @Autowired

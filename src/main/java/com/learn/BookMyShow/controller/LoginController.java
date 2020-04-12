@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 @Slf4j
-@RestController
+@RestController(value = "/new")
 public class LoginController {
 
     @Autowired
