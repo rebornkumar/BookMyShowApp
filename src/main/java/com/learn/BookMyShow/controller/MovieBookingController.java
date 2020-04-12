@@ -35,9 +35,9 @@ public class MovieBookingController {
     }
 
     @RequestMapping(value = "/movie",method = RequestMethod.GET)
-    public List<TheatreMovieDto> getMovieShowListForUser(@RequestParam String cityName,@RequestParam(required = false) String cityCode) {
+    public List<TheatreMovieDto> getMovieShowListForUser(@RequestParam String cityCode,@RequestParam(required = false) String cityName) {
 
-        List<TheatreMovieDto> theatreMovieDtoList = searchMoviesTheatreService.getMovieDtoListForCity(cityName,cityCode);
+        List<TheatreMovieDto> theatreMovieDtoList = searchMoviesTheatreService.getMovieDtoListForCity(cityCode,cityName);
         return theatreMovieDtoList;
     }
     @RequestMapping(value = "/show",method = RequestMethod.GET)

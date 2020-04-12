@@ -29,15 +29,18 @@ public class MovieTicketBookingServiceImpl implements MovieTicketBookingService 
             for(Seat seat : seatList) {
                 seat.setBooked(true);
                 seat.setCustomerId(endUserId);
+                seatRepo.save(seat);
             }
-        }
-        return new MovieTicket();
-    }
 
+        }
+        return null;
+    }
+    private void generateMovieTicket(MovieTicket movieTicket,Integer showId,Integer endUserId) {
+
+    }
     private boolean seatValidation(Integer showId,List<String>seatNumbers) {
         Integer availableSeats = seatRepo.findByShowIdAndSeatNumber(showId,seatNumbers).size();
         if(availableSeats == seatNumbers.size()) {
-
             return true;
         }
         else {

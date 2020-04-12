@@ -7,9 +7,9 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-//@Builder
 @AllArgsConstructor
 @ToString
+@Table(name = "theatre_owner")
 @Entity
 public class TheatreOwner {
 

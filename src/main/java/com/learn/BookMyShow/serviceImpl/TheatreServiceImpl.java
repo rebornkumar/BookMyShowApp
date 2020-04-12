@@ -11,11 +11,13 @@ import com.learn.BookMyShow.repository.CityRepo;
 import com.learn.BookMyShow.repository.TheatreOwnerRepo;
 import com.learn.BookMyShow.repository.TheatreRepo;
 import com.learn.BookMyShow.service.TheatreService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class TheatreServiceImpl implements TheatreService {
 
@@ -28,7 +30,7 @@ public class TheatreServiceImpl implements TheatreService {
 
     @Override
     public ItemResponseDto createTheatre(TheatreDto theatreDto) {
-        Optional<Theatre> oldTheatre = theatreRepo.findByTheatreName(theatreDto.getTheatreName());
+        Optional<Theatre> oldTheatre = theatreRepo.findByOwnerIdAndTheatreName(theatreDto.getOwnerId(),theatreDto.getTheatreName());
         if(oldTheatre.isPresent()) {
             return updateTheatreFromDto(oldTheatre.get(),theatreDto);
         }

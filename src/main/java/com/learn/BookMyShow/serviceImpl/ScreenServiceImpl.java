@@ -45,7 +45,6 @@ public class ScreenServiceImpl implements ScreenService {
 
         ItemResponseDto itemResponseDto = new ItemResponseDto();
         ResponseDto responseDto = new ResponseDto();
-
         itemResponseDto.setItemType(Item.SCREEN.toString());
         String errorMessage = "";
         Optional<Theatre>optionalTheatre  = theatreRepo.findById(screenDto.getTheatreId());
@@ -53,7 +52,7 @@ public class ScreenServiceImpl implements ScreenService {
             Screen screen = new Screen();
             List<Show> shows = new ArrayList<>();
             screen.setTheatre(optionalTheatre.get());
-            screenRepo.save(screen);
+//            screenRepo.save(screen);
             log.info("ScreenId : {}, created successfully",screen.getId());
             for(ShowDto showDto : screenDto.getShowDtoList()) {
                 Show show = new Show();
@@ -62,8 +61,9 @@ public class ScreenServiceImpl implements ScreenService {
                     show.setMovie(optionalMovie.get());
                     show.setShowDate(showDto.getShowDate());
                     show.setShowTime(showDto.getShowTime());
+                    show.setScreen(screen);
                     //
-                    showRepo.save(show);
+                    //showRepo.save(show);
                     log.info("On screenId : {} , showId : {}, show created successfully",screen.getId(),show.getId());
 //                    Date currentDate = new Date();
 //                    DateTimeFormat currentTimeStamp = new DateTimeFormat();
@@ -73,6 +73,7 @@ public class ScreenServiceImpl implements ScreenService {
 //                    show.setShowTime(currentTimeStamp);
                     show.setSeats(createSeatsInShow(show,showDto.getNumberOfSeats()));
                     showRepo.save(show);
+                    log.info("Show created in the database, ShowId : {}",show.getId());
                     shows.add(show);
                 }
                 else {
