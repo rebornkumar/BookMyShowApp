@@ -1,0 +1,351 @@
+{
+	"info": {
+		"_postman_id": "bc8a9820-3df6-4687-b748-4a408a2601c8",
+		"name": "BookMyShow_API_EndPoins",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/v1/city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/movie?cityCode=BLR",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"movie"
+					],
+					"query": [
+						{
+							"key": "cityCode",
+							"value": "BLR"
+						}
+					]
+				},
+				"description": "Get list of cities where theatre are located"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v2/city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v2/city",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v2",
+						"city"
+					]
+				},
+				"description": "get CityDto for creating city "
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v1/city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/movie?cityCode=BLR",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"movie"
+					],
+					"query": [
+						{
+							"key": "cityCode",
+							"value": "BLR"
+						}
+					]
+				},
+				"description": "Get Movie List specific to city!!"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v1/movie?cityCode=BLR&movieCode=159753",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/movie?cityCode=BLR&movieCode=159753",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"movie"
+					],
+					"query": [
+						{
+							"key": "cityCode",
+							"value": "BLR"
+						},
+						{
+							"key": "movieCode",
+							"value": "159753"
+						}
+					]
+				},
+				"description": "Get Show Details Specific To City And Movie"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/create/movie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"movieCode\": \"A1B1C1\",\n    \"movieTitle\": \"final destination!\",\n    \"releaseDate\": \"2020-05-13\",\n    \"language\": \"English\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/create/movie",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"create",
+						"movie"
+					]
+				},
+				"description": "To add new movies in the database"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/create/city",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cityCode\": \"PNB\",\n    \"cityName\": \"Patna\",\n    \"pincode\": 459789,\n    \"state\": \"Bihar\",\n    \"address\": \"MeethaPur\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/create/city",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"create",
+						"city"
+					]
+				},
+				"description": "To add new City"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v2/theatre",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"theatreName\": \"finalTestBangalore\",\n    \"description\": \"created for testing purpose\",\n    \"cityCode\": \"BLR\",\n    \"ownerId\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v2/theatre",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v2",
+						"theatre"
+					]
+				},
+				"description": "Add theatre to city by theatre owner"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v2/screen",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"theatreId\": 6,\n    \"showDtoList\": [\n        {\n            \"screenNumber\": \"\",\n            \"movieCode\": \"A1B1C1\",\n            \"movieTitle\": \"it can be blank here on movieCode is required\",\n            \"language\": \"hindi\",\n            \"showDate\": \"2020-05-12\",\n            \"showTime\": \"2020-05-12 21:27:01.898\",\n            \"numberOfSeats\": 10\n        },\n        {\n            \"screenNumber\": \"\",\n            \"movieCode\": \"xyz456\",\n            \"movieTitle\": \"moto razor\",\n            \"language\": \"hindi\",\n            \"showDate\": \"2020-05-12\",\n            \"showTime\": \"2020-05-12 21:27:01.898\",\n            \"numberOfSeats\": 10\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v2/screen",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v2",
+						"screen"
+					]
+				},
+				"description": "Add show and screen in the theatre by theatre owner"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v1/city",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "anuj1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "anuj",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/city",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"city"
+					]
+				},
+				"description": "To get list of cities where theatres are located"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v1/city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/movie?cityCode=BLR",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"movie"
+					],
+					"query": [
+						{
+							"key": "cityCode",
+							"value": "BLR"
+						}
+					]
+				},
+				"description": "To get movies in specific city"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v1/movie?cityCode=BLR&movieCode=159753",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/movie?cityCode=BLR&movieCode=159753",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"movie"
+					],
+					"query": [
+						{
+							"key": "cityCode",
+							"value": "BLR"
+						},
+						{
+							"key": "movieCode",
+							"value": "159753"
+						}
+					]
+				},
+				"description": "To get show details based on selected city and movie"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v1/booking",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"endUserId\":2,\n\t\"showId\":23,\n\t\"seatNumber\": [\"0E\",\"0F\"]\n\t\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/booking",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"booking"
+					]
+				},
+				"description": "To book seats for specific show with selected seat numbers"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
