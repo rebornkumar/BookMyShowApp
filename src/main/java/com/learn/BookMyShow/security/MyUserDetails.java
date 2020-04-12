@@ -21,12 +21,12 @@ public class MyUserDetails implements UserDetails {
         this.userName = user.getUsername();
         this.password = user.getPassword();
         this.active = user.getActive();
-        if(Constant.END_USER.equals(user.getUserType())) {
+        if(Constant.THEATRE_OWNER.equals(user.getUserType())) {
             authorities.add(new SimpleGrantedAuthority("role_user"));
+            authorities.add(new SimpleGrantedAuthority("role_admin"));
         }
         else {
             authorities.add(new SimpleGrantedAuthority("role_user"));
-            authorities.add(new SimpleGrantedAuthority("role_admin"));
         }
     }
     @Override

@@ -25,10 +25,6 @@ public class Seat {
 
     @Column(name = "is_booked",nullable = false)
     private boolean booked = false;
-//
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "booked_at")
-//    private Date bookedAt;
 
     @Column(name = "customer_id")
     private Integer customerId;

@@ -3,6 +3,7 @@ package com.learn.BookMyShow.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,6 +41,6 @@ public class MovieTicket {
     @Column(name = "show_timing")
     private String showTiming;
 
-//    @Column(name = "booked_seats")
-//    private List<String> bookedSeats;
+    @Column(name = "seat_number")
+    private String bookedSeats;
 }

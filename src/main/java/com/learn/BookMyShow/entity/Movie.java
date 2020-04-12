@@ -10,7 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-//@Builder
 @AllArgsConstructor
 @ToString
 @Table(name = "movie")
@@ -36,7 +35,4 @@ public class Movie {
 
     @OneToMany(mappedBy = "movie",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Show> shows;
-//
-//    @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-//    private List<Theatre> theatres;
 }
